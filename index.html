@@ -1,55 +1,59 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lista Minimalista</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <main class="app">
-      <header class="app__header">
-        <span class="app__badge" aria-hidden="true">Hoje</span>
-        <h1>Lembretes</h1>
-        <p>Organize o essencial com clareza e foco.</p>
-      </header>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Gerador de Link</title>
+  <style>
+    body {
+      background:#000;
+      color:#fff;
+      font-family:Arial, sans-serif;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      height:100vh;
+      margin:0;
+    }
+    .box {
+      width:320px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    input, button {
+      padding:10px;
+      border:none;
+      border-radius:6px;
+    }
+    button {
+      background:#1d9bf0;
+      color:#fff;
+      cursor:pointer;
+    }
+  </style>
+</head>
+<body>
 
-      <form id="task-form" class="task-form" aria-label="Adicionar tarefa">
-        <label class="sr-only" for="task-input">Descrição da tarefa</label>
-        <input
-          id="task-input"
-          name="task"
-          type="text"
-          placeholder="O que precisa ser feito?"
-          autocomplete="off"
-          required
-        />
-        <button type="submit" class="task-form__submit">Adicionar</button>
-      </form>
+<div class="box">
+  <h2>Gerar Link</h2>
 
-      <section aria-live="polite">
-        <ul id="task-list" class="task-list"></ul>
-        <p id="empty-state" class="empty-state">Nenhuma tarefa por aqui.</p>
-      </section>
+  <input id="destino" placeholder="Link de destino">
+  <input id="media" placeholder="Link Cloudinary (imagem ou vídeo)">
 
-      <footer class="app__footer" aria-live="polite">
-        <span id="task-counter">0 tarefas</span>
-        <button type="button" id="clear-completed" class="link-button">
-          Limpar concluídas
-        </button>
-      </footer>
-    </main>
+  <button onclick="gerar()">Gerar link</button>
 
-    <template id="task-template">
-      <li class="task">
-        <label class="task__label">
-          <input type="checkbox" class="task__checkbox" />
-          <span class="task__text"></span>
-        </label>
-        <button class="task__delete" type="button" aria-label="Remover tarefa">×</button>
-      </li>
-    </template>
+  <input id="resultado" placeholder="Link final" readonly>
+</div>
 
-    <script src="app.js"></script>
-  </body>
+<script>
+function gerar() {
+  const destino = encodeURIComponent(document.getElementById('destino').value);
+  const media = encodeURIComponent(document.getElementById('media').value);
+
+  const link = `${location.origin}/preview.html?go=${destino}&media=${media}`;
+  document.getElementById('resultado').value = link;
+}
+</script>
+
+</body>
 </html>

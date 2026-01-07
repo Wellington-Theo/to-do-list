@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const media = params.get('media');
+    const go = params.get('go');
+
+    document.write(`
+      <meta property="og:type" content="website">
+      <meta property="og:title" content="Tap to view">
+      <meta property="og:image" content="${media}">
+      <meta name="twitter:card" content="summary_large_image">
+    `);
+
+    setTimeout(() => {
+      if(go) window.location.href = go;
+    }, 1500);
+  </script>
+</head>
+
+<body style="background:black;"></body>
+</html>
